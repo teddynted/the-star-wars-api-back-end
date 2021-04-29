@@ -16,5 +16,6 @@ jobs:
           function_name: graphql
           zip_file: output.zip
           dry_run: true
-      - npm i serverless@1.37.1 -g
-      - npm ci
+      - name: Install Dependencies
+        run: npm i serverless -g
+        run: npm ci
