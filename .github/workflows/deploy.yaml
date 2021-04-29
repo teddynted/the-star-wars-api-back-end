@@ -18,11 +18,7 @@ jobs:
         with:
           node-version: ${{matrix.node-version}}
       - name: Install dependencies, Build application and Zip dist folder contents
-        run: npm ci && npm run build --if-present
-      - name: zip
-        uses: montudor/action-zip@v0.1.0
-        with:
-          args: zip -qq -r ./bundle.zip ./
+        run: npm ci
       - name: deploy zip to aws lambda
         uses: appleboy/lambda-action@master
         with:
@@ -30,4 +26,5 @@ jobs:
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws_region: ${{ secrets.AWS_REGION }}
           function_name: the-star-wars-api
-          zip_file: bundle.zip
+          zip_file: output.zip
+          dry_run: true
