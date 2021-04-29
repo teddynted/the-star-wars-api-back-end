@@ -17,7 +17,7 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: ${{matrix.node-version}}
-      - name: Install dependencies, Build application and Zip dist folder contents
+      - name: Install dependencies
         run: npm ci
       - name: deploy zip to aws lambda
         uses: appleboy/lambda-action@master
@@ -26,5 +26,4 @@ jobs:
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws_region: ${{ secrets.AWS_REGION }}
           function_name: the-star-wars-api
-          zip_file: output.zip
-          dry_run: true
+          source: example/index.js
