@@ -1,0 +1,31 @@
+service: the-star-wars-api
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  stage: dev
+  region: us-east-1
+
+plugins:
+  - serverless-offline
+  - serverless-webpack
+
+custom:
+  serverless-offline:
+    port: 1987
+  webpackIncludeModules: true
+
+functions:
+  graphql:
+    handler: index.graphqlHandler
+    events:
+      - http:
+          path: graphql
+          method: post
+          cors: true
+          integration: lambda-proxy
+      - http:
+          path: graphql
+          method: get
+          cors: true
+          integration: lambda-proxy
