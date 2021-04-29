@@ -26,4 +26,4 @@ jobs:
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws_region: ${{ secrets.AWS_REGION }}
           function_name: the-star-wars-api
-          source: example/index.js
+          source: /home/runner/work/the-star-wars-api-back-end/the-star-wars-api-back-end/index.js
