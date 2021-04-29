@@ -14,8 +14,7 @@ jobs:
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws_region: ${{ secrets.AWS_REGION }}
           function_name: graphql
-          zip_file: output.zip
-          dry_run: true
+          source: index.js
       - name: Install Serverless
         run: npm i serverless -g
       - name: Install Dependencies
