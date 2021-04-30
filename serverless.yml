@@ -15,12 +15,12 @@ custom:
     port: 1987
   webpackIncludeModules: true
 
-# package:
-#   individually: false
-#   exclude:
-#     - package.json
-#     - package-log.json
-#     - node_modules/**
+package:
+  individually: false
+  exclude:
+    - package.json
+    - package-log.json
+    - node_modules/**
 
 functions:
   graphql:
