@@ -1,0 +1,10 @@
+{
+    "path": "/graphql",
+    "queryStringParameters": {
+        "query": "{person(page: 2){name height mass gender homeworld}}"
+    },
+    "httpMethod": "GET",
+    "headers": {
+        "Content-Type": "application/json"
+    }
+}

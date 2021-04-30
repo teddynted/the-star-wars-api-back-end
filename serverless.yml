@@ -10,17 +10,11 @@ plugins:
   - serverless-offline
   - serverless-webpack
 
-custom:
-  serverless-offline:
-    port: 1987
-  webpackIncludeModules: true
-
-package:
-  individually: false
-  exclude:
-    - package.json
-    - package-log.json
-    - node_modules/**
+# custom:
+#   webpack:
+#       webpackConfig: 'webpack.config.js'
+#       includeModules: true
+#       packager: 'npm'
 
 functions:
   graphql:
@@ -36,5 +30,5 @@ functions:
           method: get
           cors: true
           integration: lambda-proxy
-    # layers:
-    #   - arn:aws:lambda:us-east-1:143255761006:layer:star-wars-api-layer-dependencies-layer:6
+    layers:
+      - arn:aws:lambda:us-east-1:143255761006:layer:star-wars-api-layer-dependencies-layer:8

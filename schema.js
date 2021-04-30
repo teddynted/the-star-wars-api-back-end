@@ -25,12 +25,16 @@ const resolvers = {
 };
 
 module.exports = {
+    playground: true,
+    introspection: true,
     typeDefs,
     resolvers,
-    context: ({ event, context }) => ({
-        headers: event.headers,
-        functionName: context.functionName,
-        event,
-        context
-    })
+    context: async ({ req, event, context }) => {
+        return ({
+            headers: event.headers,
+            functionName: context.functionName,
+            event,
+            context
+        })
+    }
 };
