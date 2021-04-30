@@ -10,12 +10,6 @@ plugins:
   - serverless-offline
   - serverless-webpack
 
-# custom:
-#   webpack:
-#       webpackConfig: 'webpack.config.js'
-#       includeModules: true
-#       packager: 'npm'
-
 functions:
   graphql:
     handler: index.graphqlHandler
