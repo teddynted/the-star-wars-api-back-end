@@ -57,5 +57,5 @@ jobs:
       - name: deploy
         run: |
           npm run-script build
-          zip -j deploy.zip ./dist/*
+          zip -j deploy.zip /dist/*
           aws lambda update-function-code --function-name=the-star-wars-api --zip-file=fileb://deploy.zip
