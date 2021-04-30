@@ -44,7 +44,9 @@ jobs:
         with:
             node-version: '12'
       - name: Install Dependencies
-        run: npm install
+        run: |
+          npm i serverless -g 
+          npm install
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
@@ -52,4 +54,4 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ secrets.AWS_REGION }}
       - name: Serverless Deploy
-        run: npm run-script deploy
+        run: sls deploy -v --stage dev
