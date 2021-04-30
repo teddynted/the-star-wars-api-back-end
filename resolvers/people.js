@@ -1,22 +1,13 @@
-const rp = require("request-promise");
+const axios = require("axios");
 
 const getPeople = (page = 1) => {
-    const options = {
-        method: "GET",
-        url: `http://swapi.dev/api/people/?page=${page}`,
-        headers: {
-            "cache-control": "no-cache",
-            "content-type": "application/json"
-        }
-    };
     return new Promise((resolve, revoke) => {
-        rp(options).then((body) => {
-            const { results } = JSON.parse(body);
+        axios.get(`http://swapi.dev/api/people/?page=${page}`).then(({data: {results}}) => {
+            console.log('results', results);
             resolve(results);
-        }).catch(err => {
-            console.log('err:', err);
+        }).catch( err => {
             revoke(err);
-        });
+        })
     });
 }
 

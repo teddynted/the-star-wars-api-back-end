@@ -14,9 +14,8 @@
   "dependencies": {
     "apollo-server": "^2.23.0",
     "apollo-server-lambda": "^2.23.0",
-    "graphql": "^15.5.0",
-    "request": "^2.88.2",
-    "request-promise": "^4.2.6"
+    "axios": "^0.21.1",
+    "graphql": "^15.5.0"
   },
   "devDependencies": {
     "babel-core": "^6.26.3",
