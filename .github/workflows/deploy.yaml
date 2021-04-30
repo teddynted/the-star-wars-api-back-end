@@ -1,29 +1,61 @@
+# name: Deploy to lambda
+
+# on:
+#   push:
+#     branches:
+#       - master
+
+# jobs:
+#   deploy_source:
+#     name: build and deploy lambda
+#     strategy:
+#       matrix:
+#         node-version: [12.x]
+#     runs-on: ubuntu-latest
+#     steps:
+#       - uses: actions/checkout@v2.3.1
+#       - uses: actions/setup-node@v1
+#         with:
+#           node-version: ${{matrix.node-version}}
+#       - name: Install dependencies
+#         run: npm ci
+#       - name: Deploy to aws lambda
+#         uses: appleboy/lambda-action@master
+#         with:
+#           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+#           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+#           aws_region: ${{ secrets.AWS_REGION }}
+#           function_name: the-star-wars-api
+#           source: /home/runner/work/the-star-wars-api-back-end/the-star-wars-api-back-end/index.js
+
 name: Deploy to lambda
 
 on:
   push:
     branches:
-      - master
+    - master
 
 jobs:
-  deploy_source:
-    name: build and deploy lambda
-    strategy:
-      matrix:
-        node-version: [12.x]
+  deploy_lambda:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2.3.1
-      - uses: actions/setup-node@v1
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
         with:
-          node-version: ${{matrix.node-version}}
-      - name: Install dependencies
-        run: npm ci
-      - name: deploy zip to aws lambda
-        uses: appleboy/lambda-action@master
+          node-version: '12'
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
         with:
-          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws_region: ${{ secrets.AWS_REGION }}
-          function_name: the-star-wars-api
-          source: /home/runner/work/the-star-wars-api-back-end/the-star-wars-api-back-end/index.js
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+      - name: npm install
+        env:
+          CI: true
+        run: |
+          npm ci
+      - name: deploy
+        run: |
+          npm run-script build
+          zip -j deploy.zip ./dist/*
+          aws lambda update-function-code --function-name=the-star-wars-api --zip-file=fileb://deploy.zip
