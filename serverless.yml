@@ -30,4 +30,4 @@ functions:
           cors: true
           integration: lambda-proxy
     layers:
-      - arn:aws:lambda:us-east-1:143255761006:layer:star-wars-api-layer-dependencies-layer:5
+      - arn:aws:lambda:us-east-1:143255761006:layer:star-wars-api-layer-dependencies-layer:6
