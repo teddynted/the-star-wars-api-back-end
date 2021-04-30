@@ -13,7 +13,9 @@ jobs:
         with:
             node-version: '12'
       - name: Install Dependencies
-        run: npm i serverless -g 
+        run: |
+          npm i serverless -g 
+          npm install
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
