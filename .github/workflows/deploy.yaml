@@ -56,5 +56,5 @@ jobs:
           npm ci
       - name: deploy
         run: |
-          zip -9 -r deploy.zip resolvers node_modules index.js package.json serverless.yml webpack.config.js schema.js package-lock.json
+          zip -9 -r deploy.zip resolvers index.js package.json serverless.yml webpack.config.js schema.js package-lock.json
           aws lambda update-function-code --function-name=the-star-wars-api --zip-file=fileb://deploy.zip
