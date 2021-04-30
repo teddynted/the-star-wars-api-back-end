@@ -56,6 +56,5 @@ jobs:
           npm ci
       - name: deploy
         run: |
-          npm run-script build
-          zip -j /home/runner/work/the-star-wars-api-back-end/the-star-wars-api-back-end/deploy.zip /home/runner/work/the-star-wars-api-back-end/the-star-wars-api-back-end/dist/*
+          zip -j deploy.zip index.js
           aws lambda update-function-code --function-name=the-star-wars-api --zip-file=fileb://deploy.zip
