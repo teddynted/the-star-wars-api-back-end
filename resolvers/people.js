@@ -10,6 +10,17 @@ const getPeople = (page = 1) => {
     });
 }
 
+const getPerson = name => {
+    return new Promise((resolve, revoke) => {
+        axios.get(`https://swapi.dev/api/people/?search=${name}`).then(({data: {results}}) => {
+            resolve(results);
+        }).catch( err => {
+            revoke(err);
+        })
+    });
+}
+
 module.exports = {
-    getPeople
+    getPeople,
+    getPerson
 };

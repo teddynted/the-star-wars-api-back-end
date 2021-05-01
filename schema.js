@@ -1,9 +1,9 @@
 const { gql } = require("apollo-server-lambda");
 
-const { getPeople } = require("./resolvers/people");
+const { getPeople, getPerson } = require("./resolvers/people");
 
 const typeDefs = gql`
-    type Person {
+    type People {
         page: Int!
         name: String
         height: String
@@ -11,15 +11,26 @@ const typeDefs = gql`
         gender: String
         homeworld: String
     }
+    type Person {
+        name: String!
+        height: String
+        mass: String
+        gender: String
+        homeworld: String
+    }
     type Query {
-        person(page: Int!): [Person]
+        people(page: Int!): [People],
+        person(name: String!): [Person]
     }
 `;
 
 const resolvers = {
     Query: {
-        person: async (obj, args, context, info) => {
+        people: async (obj, args, context, info) => {
             return await getPeople(args.page);
+        },
+        person: async (obj, args, context, info) => {
+            return await getPerson(args.name);
         }
     }
 };
