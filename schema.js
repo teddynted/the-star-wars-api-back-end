@@ -41,6 +41,10 @@ module.exports = {
     typeDefs,
     resolvers,
     context: async ({ req, event, context }) => {
+        if (event.source === 'serverless-plugin-warmup') {
+            console.log('WarmUP - Lambda is warm!')
+            return callback(null, 'Lambda is warm!')
+        }
         return ({
             headers: event.headers,
             functionName: context.functionName,
